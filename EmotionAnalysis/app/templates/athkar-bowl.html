@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AthkarBowl</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css
+    "
+    />
+    <link rel="stylesheet" href="{% static 'athkarbowl.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="{% url 'index' %}" class="logo">Athkar Bowl</a>
+      <nav class="navigators">
+        <a href="{% url 'about-us' %}">About us</a>
+        <a href="{% url 'athkar-bowl' %}">AthkarBowl</a>
+        <a href="{% url 'athkar' %}">Athkar</a>
+      </nav>
+    </header>
+
+    <div class="container mt-5">
+      <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+          <form
+            id="athkar-form"
+            action="{% url 'recommend_athkar' %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <textarea
+              id="feelings-input"
+              name="feelings"
+              class="form-control"
+              rows="3"
+              placeholder="Express your feelings here, and reconnect with Allah !!"
+              required
+            ></textarea>
+            <button type="submit" class="btn btn-primary custom-btn">
+              AthkarBowl
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section des cartes -->
+    <section id="results" class="mt-5">
+      <h3 class="recommended-heading">Recommended Athkars</h3>
+      <div class="row" id="cards-container">
+        <!-- Les cartes seront insérées ici -->
+      </div>
+    </section>
+
+    <footer class="footer mt-5">
+      <p class="text-center">Copyrights @ <span>Athkar Bowl</span></p>
+    </footer>
+     <div class="space"></div>
+    <script>
+      // Fonction d'envoi AJAX
+      $("#athkar-form").on("submit", function (e) {
+        e.preventDefault(); // Empêcher l'envoi classique du formulaire
+
+        var feelings = $("#feelings-input").val();
+        var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+        $.ajax({
+          url: "{% url 'recommend_athkar' %}",
+          type: "POST",
+          data: {
+            feelings: feelings,
+            csrfmiddlewaretoken: csrfToken,
+          },
+          success: function (response) {
+            // Vider le conteneur des cartes
+            $("#cards-container").empty();
+
+            // Vérifier si des athkars sont renvoyés
+            if (
+              response.recommended_adhkars &&
+              response.recommended_adhkars.length > 0
+            ) {
+              response.recommended_adhkars.forEach((athkar) => {
+                // Extraire les valeurs
+                const athkarArabe = athkar.arabe || ""; // Version arabe
+                const athkarAnglais = athkar.anglais || ""; // Version anglaise
+                const athkarTransliteration = athkar.translitteration || ""; // Translittération
+                console.log("Translittération:", athkarTransliteration);
+
+                // Ajouter une carte pour chaque athkar
+                $("#cards-container").append(`
+            <div class="col-md-4 mb-4">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h5 class="card-title">Athkar</h5>
+                  <p class="card-text"><strong>Arabic :</strong> ${athkarArabe}</p>
+                  <p class="card-text"><strong>English :</strong> ${athkarAnglais}</p>
+                </div>
+              </div>
+            </div>
+          `);
+              });
+            } else {
+              $("#cards-container").html(
+                `<div class="alert alert-warning">No matching Athkars found.</div>`
+              );
+            }
+          },
+          error: function (error) {
+            console.error(error);
+            alert("An error occurred. Please try again.");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

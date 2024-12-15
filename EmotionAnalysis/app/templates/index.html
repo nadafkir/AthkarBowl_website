@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athkar Bowl</title>
+    
+    <!-- CSS local -->
+    <link rel="stylesheet" href="{% static 'indexxxxx.css' %}">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="{% url 'index' %}" class="logo">Athkar Bowl</a>
+        <nav class="navigators">
+          <a href="{% url 'about-us' %}">About us</a>
+          <a href="{% url 'athkar-bowl' %}">AthkarBowl</a>
+          <a href="{% url 'athkar' %}">Athkar</a>
+        </nav>
+      </header>
+
+    <!-- Main Section -->
+    <section class="main">
+        <div>
+            <h2 class="T1">Salam aleykoum wa rahmatullah wa barakatuh<br/>
+                <span class="nomachine">Every Emotion Deserves<br>The Perfect Thikr</span>
+            </h2>
+
+            <h2 class="T2">
+                Easy to Use: Share your feelings with any language, and we’ll recommend Athkars for you
+            </h2>
+
+            <!-- Image -->
+            <img class="image1" src="/media/athkar-bowl.png" alt="Athkar bowl">
+
+            <!-- GO TO Button -->
+            <a href="{% url 'athkar-bowl' %}" class="main_btn">Try The AthkarBowl</a>
+
+
+
+        </div>
+    </section>
+      
+
+    <footer class="footer">
+        <p >Copyrights @ <span>Athkar Bowl</span></p>
+    </footer>
+    </body>
+    </html>

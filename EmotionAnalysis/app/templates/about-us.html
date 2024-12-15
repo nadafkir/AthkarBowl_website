@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css
+  "
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+      * {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+      header {
+        background-color: #e9f1fa;
+        position: fixed;
+        width: 100%;
+        z-index: 999;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 200px;
+        align-items: center;
+      }
+      .logo {
+        text-decoration: none;
+        /*text-transform: uppercase;*/
+        color: #00abe4;
+        font-size: 1.8em;
+        font-weight: 700;
+      }
+      .logo:hover {
+        color: #f6442f;
+      }
+      .navigators a {
+        text-decoration: none;
+        color: #00abe4;
+        padding: 5px;
+      }
+      .navigators a:hover {
+        color: #f6442f;
+      }
+      .about-us {
+        background-color: #e9f1fa;
+        color: #1e375a;
+        display: flex;
+        justify-content: center; /* Centre horizontalement */
+        align-items: center; /* Centre verticalement */
+        height: 94vh; /* Prend toute la hauteur de la fenêtre */
+        /* Évite tout espacement non voulu */
+      }
+      p {
+        text-align: left;
+      }
+      h2 {
+        font-size: 3em;
+        color: #00abe4;
+        font-weight: 800;
+      }
+      .footer {
+        background-color: #1e375a;
+        color: #e9f1fa;
+        padding: 1em;
+        font-size: 1em;
+        font-weight: 600;
+        height: 45px;
+        text-align: center;
+      }
+      .footer span {
+        color: #00abe4;
+        background-color: #1e375a;
+      }
+    </style>
+    <title>About us</title>
+  </head>
+  <body>
+    <header>
+      <a href="{% url 'index' %}" class="logo">Athkar Bowl</a>
+      <nav class="navigators">
+        <a href="{% url 'about-us' %}">About us</a>
+        <a href="{% url 'athkar-bowl' %}">AthkarBowl</a>
+        <a href="{% url 'athkar' %}">Athkar</a>
+      </nav>
+    </header>
+
+    <section class="py-5 about-us">
+      <div class="container">
+        <div class="text-center">
+          <span class="text-muted">Our Story</span>
+          <h2 class="fw-bold mb-3">About Us</h2>
+        </div>
+        <div class="row gx-5">
+          <div class="col-md-6">
+            <div class="lead text-center text-md-start">
+              <p>
+                Salam aleykoum wa rahmatullah wa barakatuh, My name is Afkir
+                Nada, I am an Engineering student specializing in digital
+                transformation and artificial intelligence, passionate about
+                data analysis, data science and web development. I focus on
+                creating projects that combine technical expertise with
+                meaningful human impact for the sake of Allah
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="lead text-center text-md-start">
+              <p>
+                I wish to build a house for myself in Paradise and contribute to
+                the construction of houses for others there, as this is one of
+                Allah's generous blessings upon me. Furthermore, I aim to
+                express my sincere intention to Allah in using artificial
+                intelligence for the betterment of the Muslim Ummah, not for its
+                destruction. May peace and blessings be upon the Messenger of
+                Allah.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p>Copyrights @ <span>Athkar Bowl</span></p>
+    </footer>
+  </body>
+</html>
